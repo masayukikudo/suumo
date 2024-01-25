@@ -130,6 +130,11 @@ for page in range(1, max_pages + 1):
 
         station_info_list = extract_station_info(building_info2)
 
+        # 最寄り駅情報から駅名だけを抽出して文字列に変換
+        station_info_list = extract_station_info(building_info2)
+        stations = [station for _, station, _ in station_info_list]
+        formatted_station_info = ', '.join(stations)
+
         # 築年数、階数、材質情報を正規表現で抽出
         built_year_matches = re.search(r'築(\d+年|新築)', building_info2)
         floors_matches = re.search(r'(\d+)階建', building_info2)
@@ -173,7 +178,7 @@ for page in range(1, max_pages + 1):
         not_recommended_count = len(not_recommended_stars)
 
         # カラムに情報を追加
-        data_home.extend([room_number, layout, area, direction, prefecture, station_info_list, city, address, walk_time, delivery_box, parking, elevator, built_year, floors, material, sale_info , sale_info_2, sale_info_3, recommended_count])
+        data_home.extend([room_number, layout, area, direction, prefecture, formatted_station_info, city, address, walk_time, delivery_box, parking, elevator, built_year, floors, material, sale_info , sale_info_2, sale_info_3, recommended_count])
 
         # 物件情報と部屋情報をくっつける
         data_samples.append(data_home)
